@@ -19,5 +19,5 @@ public class ViewModelField<T> : IViewModelField
 
     public Action<object> OnValueChanged { get; set; }
     
-    public object GetObject => propertyValue;
+    public object GetObject => Value;
 }

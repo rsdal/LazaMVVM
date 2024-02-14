@@ -11,7 +11,7 @@ public class CommandBind : BaseBind
 
     private void Start()
     {
-        methodInfo = BindInfo.baseViewModel.GetMethodByName(BindInfo.Field);
+        methodInfo = BindInfo.baseViewModel.GetMethodByName(this, BindInfo.Field);
         _button = GetComponent<Button>();
         _button.onClick.AddListener(OnInvoke);
     }

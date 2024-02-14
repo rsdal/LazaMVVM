@@ -2,14 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class ViewModeListField<T> : IViewModelField, IList<BaseViewModel> where T : BaseViewModel
+public class ViewModelListField<T> : IViewModelField, IList<T> where T : BaseViewModel
 {
     public Action<object> OnValueChanged { get; set; }
-    public object GetObject => this;
+    public object GetObject => _baseViewModels;
 
-    private readonly IList<BaseViewModel> _baseViewModels = new List<BaseViewModel>();
+    private readonly IList<T> _baseViewModels = new List<T>();
 
-    public IEnumerator<BaseViewModel> GetEnumerator()
+    public IEnumerator<T> GetEnumerator()
     {
         return _baseViewModels.GetEnumerator();
     }
@@ -19,7 +19,7 @@ public class ViewModeListField<T> : IViewModelField, IList<BaseViewModel> where 
         return GetEnumerator();
     }
 
-    public void Add(BaseViewModel item)
+    public void Add(T item)
     {
         _baseViewModels.Add(item);
         OnValueChanged?.Invoke(_baseViewModels);
@@ -30,17 +30,17 @@ public class ViewModeListField<T> : IViewModelField, IList<BaseViewModel> where 
         _baseViewModels.Clear();
     }
 
-    public bool Contains(BaseViewModel item)
+    public bool Contains(T item)
     {
         return _baseViewModels.Contains(item);
     }
 
-    public void CopyTo(BaseViewModel[] array, int arrayIndex)
+    public void CopyTo(T[] array, int arrayIndex)
     {
         _baseViewModels.CopyTo(array, arrayIndex);
     }
 
-    public bool Remove(BaseViewModel item)
+    public bool Remove(T item)
     {
         bool isRemoved = _baseViewModels.Remove(item);
         OnValueChanged?.Invoke(_baseViewModels);
@@ -49,12 +49,12 @@ public class ViewModeListField<T> : IViewModelField, IList<BaseViewModel> where 
 
     public int Count => _baseViewModels.Count;
     public bool IsReadOnly => _baseViewModels.IsReadOnly;
-    public int IndexOf(BaseViewModel item)
+    public int IndexOf(T item)
     {
         return _baseViewModels.IndexOf(item);
     }
 
-    public void Insert(int index, BaseViewModel item)
+    public void Insert(int index, T item)
     {
         _baseViewModels.Insert(index, item);
     }
@@ -64,7 +64,7 @@ public class ViewModeListField<T> : IViewModelField, IList<BaseViewModel> where 
         _baseViewModels.RemoveAt(index);
     }
 
-    public BaseViewModel this[int index]
+    public T this[int index]
     {
         get => _baseViewModels[index];
         set => _baseViewModels[index] = value;

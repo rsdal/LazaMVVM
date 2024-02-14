@@ -43,8 +43,14 @@ public class BaseViewModel : ScriptableObject
         }
     }
     
-    public IViewModelField GetFieldByName(string name)
+    public IViewModelField GetFieldByName(BaseBind bind, string name)
     {
+        var listItem = bind.BindInfo.baseViewModel.GetType().GetCustomAttribute<ListItem>();
+        if (listItem != null)
+        {
+            return bind.GetComponent<ViewModelProvider>().ViewModel.GetFieldByName(bind, name);
+        }
+        
         Dictionary<string, IViewModelField> fields = GetFields();
         
         return fields[name];
@@ -80,7 +86,7 @@ public class BaseViewModel : ScriptableObject
         }
     }
     
-    public MethodInfo GetMethodByName(string name)
+    public MethodInfo GetMethodByName(BaseBind bind, string name)
     {
         Dictionary<string, MethodInfo> methods = GetMethods();
         return methods[name];

@@ -1,6 +1,6 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
+[ListItem]
 [CreateAssetMenu(fileName = "ViewModelItem", menuName = "ViewModels/New ViewModelItem")]
 public class ViewModelItem : BaseViewModel
 {

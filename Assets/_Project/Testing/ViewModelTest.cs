@@ -5,7 +5,7 @@ public class ViewModelTest : BaseViewModel
 {
     public ViewModelField<int> PlayerName = new ViewModelField<int>();
     public ViewModelField<string> PlayerNameTest2 = new ViewModelField<string>();
-    public ViewModeListField<ViewModelItem> viewmodelItens = new ViewModeListField<ViewModelItem>();
+    public ViewModelListField<ViewModelItem> viewmodelItens = new ViewModelListField<ViewModelItem>();
     
     public int x;
     

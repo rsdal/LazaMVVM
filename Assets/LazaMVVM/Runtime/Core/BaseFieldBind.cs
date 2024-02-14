@@ -4,13 +4,13 @@ public abstract class BaseFieldBind<T> : BaseBind
 
     private void Start()
     {
-        field = BindInfo.baseViewModel.GetFieldByName(BindInfo.Field);
+        field = BindInfo.baseViewModel.GetFieldByName(this, BindInfo.Field);
         OnInternalValueChanged(field.GetObject);
         field.OnValueChanged += OnInternalValueChanged;
     }
 
     private void OnInternalValueChanged(object newValue)
-    {
+    { 
         OnValueChanged((T)newValue);
     }
 
