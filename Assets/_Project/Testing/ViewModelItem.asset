@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb9f239516564040a3e6dc0c5e6d7115, type: 3}
-  m_Name: ViewModelTest
+  m_Script: {fileID: 11500000, guid: 1bf8f526842c4491a323941474451d74, type: 3}
+  m_Name: ViewModelItem
   m_EditorClassIdentifier: 
-  PlayerName:
-    propertyValue: 0
-  PlayerNameTest2:
-    propertyValue: Test 2
-  x: 0
+  Index:
+    propertyValue: 10

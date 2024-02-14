@@ -44,11 +44,18 @@ public class MVVMFieldDrawerUIE : PropertyDrawer
             
                 foreach (KeyValuePair<string, IViewModelField> currentField in fields)
                 {
-                    Type x = currentField.Value.GetObject.GetType();
-                    if (filters.Contains(x))
+                    Type fieldType = currentField.Value.GetObject.GetType();
+
+                    //Is it a list?
+                    if (fieldType.IsGenericType)
+                    {
+                        fieldType =  fieldType.GetGenericTypeDefinition();
+                    }
+
+                    if (filters.Contains(fieldType))
                     {
                         possibleFields.Add(currentField.Key);
-                    }
+                    } 
                 } 
             }
             
