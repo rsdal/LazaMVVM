@@ -1,17 +1,23 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class ViewModelListField<T> : IViewModelField, IList<T> where T : BaseViewModel
+public class ViewModelListField<T> : ViewModelField<List<BaseViewModel>>, IList<T> where T : BaseViewModel
 {
-    public Action<object> OnValueChanged { get; set; }
-    public object GetObject => _baseViewModels;
+    public ViewModelListField()
+    {
+        Value = new List<BaseViewModel>();
+    }
+    
+    public new IReadOnlyList<BaseViewModel> Value
+    {
+        get => base.Value;
 
-    private readonly IList<T> _baseViewModels = new List<T>();
-
+        set => base.Value = value != null ? new List<BaseViewModel>(value) : new List<BaseViewModel>();
+    }
+    
     public IEnumerator<T> GetEnumerator()
     {
-        return _baseViewModels.GetEnumerator();
+        return ((IEnumerable<T>) Value).GetEnumerator();
     }
 
     IEnumerator IEnumerable.GetEnumerator()
@@ -21,52 +27,57 @@ public class ViewModelListField<T> : IViewModelField, IList<T> where T : BaseVie
 
     public void Add(T item)
     {
-        _baseViewModels.Add(item);
-        OnValueChanged?.Invoke(_baseViewModels);
+        propertyValue.Add(item);
+        OnValueChanged?.Invoke(propertyValue);
     }
 
     public void Clear()
     {
-        _baseViewModels.Clear();
+        propertyValue.Clear();
+        OnValueChanged?.Invoke(propertyValue);
     }
 
     public bool Contains(T item)
     {
-        return _baseViewModels.Contains(item);
+        return propertyValue.Contains(item);
     }
 
     public void CopyTo(T[] array, int arrayIndex)
     {
-        _baseViewModels.CopyTo(array, arrayIndex);
+        propertyValue.CopyTo(array, arrayIndex);
     }
 
     public bool Remove(T item)
     {
-        bool isRemoved = _baseViewModels.Remove(item);
-        OnValueChanged?.Invoke(_baseViewModels);
+        bool isRemoved = propertyValue.Remove(item);
+        OnValueChanged?.Invoke(propertyValue);
         return isRemoved;
     }
 
-    public int Count => _baseViewModels.Count;
-    public bool IsReadOnly => _baseViewModels.IsReadOnly;
+    public int Count => propertyValue.Count;
+    public bool IsReadOnly => false;
     public int IndexOf(T item)
     {
-        return _baseViewModels.IndexOf(item);
+        return propertyValue.IndexOf(item);
     }
 
     public void Insert(int index, T item)
     {
-        _baseViewModels.Insert(index, item);
+        propertyValue.Insert(index, item);
     }
 
     public void RemoveAt(int index)
     {
-        _baseViewModels.RemoveAt(index);
+        propertyValue.RemoveAt(index);
     }
 
     public T this[int index]
     {
-        get => _baseViewModels[index];
-        set => _baseViewModels[index] = value;
+        get => (T)Value[index];
+        set
+        {
+            propertyValue[index] = value;
+            OnValueChanged?.Invoke(propertyValue);
+        }
     }
 }

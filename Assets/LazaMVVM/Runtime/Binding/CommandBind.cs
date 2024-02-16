@@ -9,9 +9,12 @@ public class CommandBind : BaseBind
     private MethodInfo methodInfo;
     private Button _button;
 
-    private void Start()
+    protected override void Initialize()
     {
-        methodInfo = BindInfo.baseViewModel.GetMethodByName(this, BindInfo.Field);
+        base.Initialize();
+        
+        methodInfo = BindInfo.baseViewModel.GetMethodByName(BindInfo.Field);
+        
         _button = GetComponent<Button>();
         _button.onClick.AddListener(OnInvoke);
     }

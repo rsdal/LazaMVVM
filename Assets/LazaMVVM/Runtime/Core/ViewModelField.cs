@@ -5,7 +5,7 @@ using UnityEngine;
 public class ViewModelField<T> : IViewModelField
 {
     [SerializeField]
-    private T propertyValue;
+    protected T propertyValue;
     
     public T Value
     {

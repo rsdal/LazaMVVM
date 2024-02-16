@@ -1,10 +1,14 @@
+using System.Reflection;
+
 public abstract class BaseFieldBind<T> : BaseBind
 {
     private IViewModelField field;
 
-    private void Start()
+    protected override void Initialize()
     {
-        field = BindInfo.baseViewModel.GetFieldByName(this, BindInfo.Field);
+        base.Initialize();
+        
+        field = BindInfo.baseViewModel.GetFieldByName(BindInfo.Field);
         OnInternalValueChanged(field.GetObject);
         field.OnValueChanged += OnInternalValueChanged;
     }
