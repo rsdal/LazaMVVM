@@ -64,11 +64,13 @@ public class ViewModelListField<T> : ViewModelField<List<BaseViewModel>>, IList<
     public void Insert(int index, T item)
     {
         propertyValue.Insert(index, item);
+        OnValueChanged?.Invoke(propertyValue);
     }
 
     public void RemoveAt(int index)
     {
         propertyValue.RemoveAt(index);
+        OnValueChanged?.Invoke(propertyValue);
     }
 
     public T this[int index]
