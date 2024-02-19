@@ -43,11 +43,16 @@ public class BaseViewModel : ScriptableObject
         }
     }
     
-    public IViewModelField GetFieldByName(string name)
+    public bool GetFieldByName(string name, out IViewModelField field)
     {
         Dictionary<string, IViewModelField> fields = GetFields();
-        
-        return fields[name];
+
+        if (fieldsDictionary.TryGetValue(name, out field))
+        {
+            return true;
+        }
+
+        return false;
     }
 
     public Dictionary<string, MethodInfo> GetMethods()
@@ -80,9 +85,15 @@ public class BaseViewModel : ScriptableObject
         }
     }
     
-    public MethodInfo GetMethodByName(string name)
+    public bool GetMethodByName(string name, out MethodInfo method)
     {
         Dictionary<string, MethodInfo> methods = GetMethods();
-        return methods[name];
+
+        if (methods.TryGetValue(name, out method))
+        {
+            return true;
+        }
+ 
+        return false;
     }
 }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ViewModelTest
   m_EditorClassIdentifier: 
   PlayerName:
-    propertyValue: 0
+    propertyValue: 98
   PlayerNameTest2:
     propertyValue: Test 2
   x: 0

@@ -13,7 +13,16 @@ public class CommandBind : BaseBind
     {
         base.Initialize();
         
-        methodInfo = BindInfo.baseViewModel.GetMethodByName(BindInfo.Field);
+        bool isSuccess = BindInfo.baseViewModel.GetMethodByName(BindInfo.Field, out methodInfo);
+
+        if (!isSuccess)
+        {
+            Debug.LogError($"Wasn't possible to find a method with: \n " +
+                           $"name: {BindInfo.Field} \n " +
+                           $"viewmodel: {BindInfo.baseViewModel.GetType()} \n " +
+                           $"GameObject: {gameObject.name}");
+            return;
+        }
         
         _button = GetComponent<Button>();
         _button.onClick.AddListener(OnInvoke);
@@ -21,7 +30,7 @@ public class CommandBind : BaseBind
 
     private void OnDestroy()
     {
-        _button.onClick.RemoveListener(OnInvoke);
+        _button?.onClick.RemoveListener(OnInvoke);
     }
 
     private void OnInvoke()

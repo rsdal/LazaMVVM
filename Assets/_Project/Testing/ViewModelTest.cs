@@ -4,7 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ViewModelTest", menuName = "ViewModels/New ViewModelTest")]
 public class ViewModelTest : BaseViewModel
 {
-    public ViewModelField<int> PlayerName = new ViewModelField<int>();
+    //public ViewModelField<int> PlayerName = new ViewModelField<int>();
     public ViewModelField<string> PlayerNameTest2 = new ViewModelField<string>();
     public ViewModelListField<ViewModelItem> viewmodelItens = new ViewModelListField<ViewModelItem>();
     // public ViewModelField<List<string>> Test = new ViewModelField<List<string>>();
@@ -14,7 +14,7 @@ public class ViewModelTest : BaseViewModel
     [ViewModelCommand]
     public void Add()
     {
-        PlayerName.Value = Random.Range(0, 100);
+        //PlayerName.Value = Random.Range(0, 100);
 
         ViewModelItem viewModelItem = new ViewModelItem();
         viewModelItem.Index.Value = Random.Range(0, 1000);
