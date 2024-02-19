@@ -1,23 +1,20 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
-public class ViewModelListField<T> : ViewModelField<List<BaseViewModel>>, IList<T> where T : BaseViewModel
+[Serializable]
+public class ViewModelListField<T> : IViewModelField, IList<T> where T : BaseViewModel
 {
-    public ViewModelListField()
-    {
-        Value = new List<BaseViewModel>();
-    }
-    
-    public new IReadOnlyList<BaseViewModel> Value
-    {
-        get => base.Value;
+    [SerializeField] 
+    private List<BaseViewModel> propertyValue = new();
 
-        set => base.Value = value != null ? new List<BaseViewModel>(value) : new List<BaseViewModel>();
-    }
+    public Action<object> OnValueChanged { get; set; }
+    public object GetObject => propertyValue;
     
     public IEnumerator<T> GetEnumerator()
     {
-        return ((IEnumerable<T>) Value).GetEnumerator();
+        return ((IEnumerable<T>)propertyValue).GetEnumerator();
     }
 
     IEnumerator IEnumerable.GetEnumerator()
@@ -75,7 +72,7 @@ public class ViewModelListField<T> : ViewModelField<List<BaseViewModel>>, IList<
 
     public T this[int index]
     {
-        get => (T)Value[index];
+        get => (T)propertyValue[index];
         set
         {
             propertyValue[index] = value;
