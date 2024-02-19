@@ -1,4 +1,3 @@
-using System.Reflection;
 
 public abstract class BaseFieldBind<T> : BaseBind
 {
