@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
 public class ViewModelListField<T> : IViewModelField, IList<T> where T : BaseViewModel
 {
     [SerializeField] 
