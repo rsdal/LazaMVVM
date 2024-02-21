@@ -8,14 +8,16 @@ public abstract class BaseFieldBind<T> : BaseBind
     protected override void Initialize()
     {
         base.Initialize();
-        
-        bool isSuccess = BindInfo.baseViewModel.GetFieldByName(BindInfo.Field, out field);
 
+        IViewModel viewModel = BindInfo.viewModel as IViewModel;
+        
+        bool isSuccess = viewModel.GetFieldByName(BindInfo.Field, out field);
+        
         if (!isSuccess)
         {
             Debug.LogError($"Wasn't possible to find a field with: \n " +
                            $"name: {BindInfo.Field} \n " +
-                           $"viewmodel: {BindInfo.baseViewModel.GetType()} \n " +
+                           $"viewmodel: {BindInfo.viewModel.GetType()} \n " +
                            $"GameObject: {gameObject.name}");
             
             return;

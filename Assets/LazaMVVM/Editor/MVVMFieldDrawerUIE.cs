@@ -13,7 +13,7 @@ public class MVVMFieldDrawerUIE : PropertyDrawer
     {
         var container = new VisualElement();
 
-        SerializedProperty viewModelSerializedProperty = property.FindPropertyRelative("baseViewModel");
+        SerializedProperty viewModelSerializedProperty = property.FindPropertyRelative("viewModel");
         var viewModelField =  new PropertyField(viewModelSerializedProperty, "ViewModel");
         container.Add(viewModelField);
         
@@ -27,8 +27,8 @@ public class MVVMFieldDrawerUIE : PropertyDrawer
 
             if (filter is CommandBindFilter)
             {
-               Dictionary<string, MethodInfo> methods = ((BaseViewModel)viewModelSerializedProperty.boxedValue).GetMethods();
-
+               Dictionary<string, MethodInfo> methods = ((IViewModel)viewModelSerializedProperty.boxedValue).GetMethods();
+            
                foreach (KeyValuePair<string, MethodInfo> method in methods)
                {
                    possibleFields.Add(method.Key);
@@ -39,8 +39,8 @@ public class MVVMFieldDrawerUIE : PropertyDrawer
                 BindFilter bindFilter = filter as BindFilter;
 
                 Type[] filters = bindFilter.GetFiltersTypes;
-         
-                Dictionary<string, IViewModelField> fields = ((BaseViewModel)viewModelSerializedProperty.boxedValue).GetFields();
+
+                Dictionary<string, IViewModelField> fields = ((IViewModel)viewModelSerializedProperty.boxedValue).GetFields();
             
                 foreach (KeyValuePair<string, IViewModelField> currentField in fields)
                 {
@@ -57,7 +57,7 @@ public class MVVMFieldDrawerUIE : PropertyDrawer
                         possibleFields.Add(currentField.Key);
                     } 
                 } 
-            }
+             }
             
             DropdownField nameField = new DropdownField("Fields",
                     possibleFields,

@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ViewModelTest", menuName = "ViewModels/New ViewModelTest")]
-public class ViewModelTest : BaseViewModel
+public class ViewModelTest : ScriptableObjectViewModel
 {
     //public ViewModelField<int> PlayerName = new ViewModelField<int>();
     public ViewModelField<string> PlayerNameTest2 = new ViewModelField<string>();
@@ -21,11 +21,18 @@ public class ViewModelTest : BaseViewModel
         viewmodelItens.Add(viewModelItem);
         
         // Test.Value = new List<string>();
+        
     }
     
     [ViewModelCommand]
     public void Remove()
     {
         viewmodelItens.RemoveAt(0);
+    }
+    
+    [ViewModelCommand]
+    public void DebugView()
+    {
+        Debug.Log("Debug!!");
     }
 }

@@ -2,7 +2,7 @@
 
 [ListItem]
 [CreateAssetMenu(fileName = "ViewModelItem", menuName = "ViewModels/New ViewModelItem")]
-public class ViewModelItem : BaseViewModel
+public class ViewModelItem : ScriptableObjectViewModel
 {
     public ViewModelField<int> Index = new ViewModelField<int>();
 

@@ -13,16 +13,18 @@ public class CommandBind : BaseBind
     {
         base.Initialize();
         
-        bool isSuccess = BindInfo.baseViewModel.GetMethodByName(BindInfo.Field, out methodInfo);
-
-        if (!isSuccess)
-        {
-            Debug.LogError($"Wasn't possible to find a method with: \n " +
-                           $"name: {BindInfo.Field} \n " +
-                           $"viewmodel: {BindInfo.baseViewModel.GetType()} \n " +
-                           $"GameObject: {gameObject.name}");
-            return;
-        }
+        IViewModel viewModel = BindInfo.viewModel as IViewModel;
+        
+        bool isSuccess = viewModel.GetMethodByName(BindInfo.Field, out methodInfo);
+        
+         if (!isSuccess)
+         {
+             Debug.LogError($"Wasn't possible to find a method with: \n " +
+                            $"name: {BindInfo.Field} \n " +
+                            $"viewmodel: {BindInfo.viewModel.GetType()} \n " +
+                            $"GameObject: {gameObject.name}");
+             return;
+         }
         
         _button = GetComponent<Button>();
         _button.onClick.AddListener(OnInvoke);
@@ -35,6 +37,6 @@ public class CommandBind : BaseBind
 
     private void OnInvoke()
     {
-        methodInfo.Invoke(BindInfo.baseViewModel, null);
+        methodInfo.Invoke(BindInfo.viewModel, null);
     }
 }

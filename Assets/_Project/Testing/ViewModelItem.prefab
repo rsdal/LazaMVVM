@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BindInfo:
-    baseViewModel: {fileID: 11400000, guid: 20adb62964ed5d64a8a08164cae42c73, type: 2}
+    viewModel: {fileID: 11400000, guid: 20adb62964ed5d64a8a08164cae42c73, type: 2}
     Field: Index
 --- !u!114 &614978497239564720
 MonoBehaviour:
@@ -299,7 +299,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BindInfo:
-    baseViewModel: {fileID: 11400000, guid: 20adb62964ed5d64a8a08164cae42c73, type: 2}
+    viewModel: {fileID: 11400000, guid: 20adb62964ed5d64a8a08164cae42c73, type: 2}
     Field: DebugIndex
 --- !u!1 &7559246574848337112
 GameObject:

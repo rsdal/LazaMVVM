@@ -2,28 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using UnityEngine;
 
-public class BaseViewModel : ScriptableObject
+public class ViewModel 
 {
     private Dictionary<string, IViewModelField> fieldsDictionary { get; set; }
     private Dictionary<string, MethodInfo> methodsDictionary { get; set; }
 
-    public Dictionary<string, IViewModelField> GetFields()
+    public Dictionary<string, IViewModelField> GetFields(IViewModel target)
     {
         if (fieldsDictionary == null)
         {
-            InitializeFields();
+            InitializeFields(target);
         }
 
         return fieldsDictionary;
     }
     
-    private void InitializeFields()
+    private void InitializeFields(IViewModel target)
     {
         fieldsDictionary = new Dictionary<string, IViewModelField>();
             
-        Type type = this.GetType();
+        Type type = target.GetType();
         FieldInfo[] fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 
         for (var index = 0; index < fields.Length; index++)
@@ -38,38 +37,33 @@ public class BaseViewModel : ScriptableObject
                 continue;
             }
 
-            IViewModelField viewModelField = (IViewModelField)field.GetValue(this);
+            IViewModelField viewModelField = (IViewModelField)field.GetValue(target);
             fieldsDictionary.Add(field.Name, viewModelField);
         }
     }
     
-    public bool GetFieldByName(string name, out IViewModelField field)
+    public bool GetFieldByName(IViewModel target, string name, out IViewModelField field)
     {
-        Dictionary<string, IViewModelField> fields = GetFields();
+        Dictionary<string, IViewModelField> fields = GetFields(target);
 
-        if (fieldsDictionary.TryGetValue(name, out field))
-        {
-            return true;
-        }
-
-        return false;
+        return fieldsDictionary.TryGetValue(name, out field);
     }
 
-    public Dictionary<string, MethodInfo> GetMethods()
+    public Dictionary<string, MethodInfo> GetMethods(IViewModel target)
     {
         if (methodsDictionary == null)
         {
-            InitializeMethods();
+            InitializeMethods(target);
         }
 
         return methodsDictionary;
     }
     
-    private void InitializeMethods()
+    private void InitializeMethods(IViewModel target)
     {
         methodsDictionary = new Dictionary<string, MethodInfo>();
         
-        Type type = this.GetType();
+        Type type = target.GetType();
         
         MethodInfo[] methods = type.GetMethods(
             BindingFlags.InvokeMethod | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
@@ -85,15 +79,10 @@ public class BaseViewModel : ScriptableObject
         }
     }
     
-    public bool GetMethodByName(string name, out MethodInfo method)
+    public bool GetMethodByName(IViewModel target, string name, out MethodInfo method)
     {
-        Dictionary<string, MethodInfo> methods = GetMethods();
+        Dictionary<string, MethodInfo> methods = GetMethods(target);
 
-        if (methods.TryGetValue(name, out method))
-        {
-            return true;
-        }
- 
-        return false;
+        return methods.TryGetValue(name, out method);
     }
 }

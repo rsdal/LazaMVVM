@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ViewModelListField<T> : IViewModelField, IList<T> where T : BaseViewModel
+public class ViewModelListField<T> : IViewModelField, IList<T> where T : IViewModel
 {
     [SerializeField] 
-    private List<BaseViewModel> propertyValue = new();
+    private List<IViewModel> propertyValue = new();
 
     public Action<object> OnValueChanged { get; set; }
     public object GetObject => propertyValue;
@@ -40,7 +40,7 @@ public class ViewModelListField<T> : IViewModelField, IList<T> where T : BaseVie
 
     public void CopyTo(T[] array, int arrayIndex)
     {
-        propertyValue.CopyTo(array, arrayIndex);
+        //propertyValue.CopyTo(array, arrayIndex);
     }
 
     public bool Remove(T item)

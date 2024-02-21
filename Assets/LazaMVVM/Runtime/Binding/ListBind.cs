@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 
 [BindFilter(typeof(List<>))]
-public class ListBind : BaseFieldBind<List<BaseViewModel>>
+public class ListBind : BaseFieldBind<List<IViewModel>>
 {
     [SerializeField]
     private ViewModelProvider Template;
@@ -12,7 +12,7 @@ public class ListBind : BaseFieldBind<List<BaseViewModel>>
     
     private List<ViewModelProvider> instances = new List<ViewModelProvider>();
     
-    protected override void OnValueChanged(List<BaseViewModel> newValue)
+    protected override void OnValueChanged(List<IViewModel> newValue)
     {
         for (int i = instances.Count - 1; i >= 0; i--)
         {

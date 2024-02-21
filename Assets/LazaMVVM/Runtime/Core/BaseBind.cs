@@ -1,4 +1,3 @@
-using System;
 using System.Reflection;
 using UnityEngine;
 
@@ -6,7 +5,7 @@ public abstract class BaseBind : MonoBehaviour
 {
     private void Start()
     {
-        var listItem = BindInfo.baseViewModel.GetType().GetCustomAttribute<ListItem>();
+        var listItem = BindInfo.viewModel.GetType().GetCustomAttribute<ListItem>();
         
         if (listItem != null)
         {
@@ -18,9 +17,9 @@ public abstract class BaseBind : MonoBehaviour
                 
                 if (viewModelProvider != null)
                 {
-                    BindInfo.baseViewModel = viewModelProvider.ViewModel;
+                    BindInfo.viewModel = (Object)viewModelProvider.ViewModel;
                     break;
-                }
+                }  
 
                 findTransform = transform.parent;
             }
@@ -32,13 +31,4 @@ public abstract class BaseBind : MonoBehaviour
     protected virtual void Initialize(){}
 
     public BindInfo BindInfo;
-}
-
-[Serializable]
-public class BindInfo
-{
-    [field: SerializeField]
-    public BaseViewModel baseViewModel;
-    [field: SerializeField]
-    public string Field;
 }
