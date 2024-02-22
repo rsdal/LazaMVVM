@@ -16,7 +16,7 @@ public class ViewModelTest : ScriptableObjectViewModel
     {
         //PlayerName.Value = Random.Range(0, 100);
 
-        ViewModelItem viewModelItem = new ViewModelItem();
+        ViewModelItem viewModelItem = ScriptableObject.CreateInstance<ViewModelItem>();
         viewModelItem.Index.Value = Random.Range(0, 1000);
         viewmodelItens.Add(viewModelItem);
         

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ public class ListBind : BaseFieldBind<List<IViewModel>>
     private ViewModelProvider Template;
     [SerializeField]
     private Transform parent;
-    
+
     private List<ViewModelProvider> instances = new List<ViewModelProvider>();
     
     protected override void OnValueChanged(List<IViewModel> newValue)
@@ -22,7 +23,8 @@ public class ListBind : BaseFieldBind<List<IViewModel>>
         
         for (int i = 0; i < newValue.Count; i++)
         {
-            ViewModelProvider provider = GameObject.Instantiate(Template, parent);
+            ViewModelProvider provider = Instantiate(Template, parent);   
+            
             provider.ViewModel = newValue[i];
             
             instances.Add(provider);
