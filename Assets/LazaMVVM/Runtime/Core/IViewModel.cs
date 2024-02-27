@@ -7,4 +7,5 @@ public interface IViewModel
     bool GetFieldByName(string name, out IViewModelField field);
     Dictionary<string, MethodInfo> GetMethods();
     bool GetMethodByName(string name, out MethodInfo method);
+    void RemoveItem();
 }

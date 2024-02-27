@@ -25,4 +25,9 @@ public class MonoBehaviourViewModel : MonoBehaviour, IViewModel
     {
         return _viewModel.GetMethodByName(this, name, out method);
     }
+
+    public void RemoveItem()
+    {
+        Destroy(gameObject);
+    }
 }

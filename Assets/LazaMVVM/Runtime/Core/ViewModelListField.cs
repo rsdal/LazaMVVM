@@ -46,7 +46,12 @@ public class ViewModelListField<T> : IViewModelField, IList<T> where T : IViewMo
     public bool Remove(T item)
     {
         bool isRemoved = propertyValue.Remove(item);
+
+        if (isRemoved)
+            item.RemoveItem();
+        
         OnValueChanged?.Invoke(propertyValue);
+        
         return isRemoved;
     }
 
@@ -65,6 +70,7 @@ public class ViewModelListField<T> : IViewModelField, IList<T> where T : IViewMo
 
     public void RemoveAt(int index)
     {
+        propertyValue[index].RemoveItem();
         propertyValue.RemoveAt(index);
         OnValueChanged?.Invoke(propertyValue);
     }
