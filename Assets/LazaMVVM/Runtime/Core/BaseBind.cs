@@ -19,8 +19,13 @@ public abstract class BaseBind : MonoBehaviour
                 {
                     BindInfo.viewModel = (Object)viewModelProvider.ViewModel;
                     break;
-                }  
+                }
 
+                if (transform.parent == transform.root)
+                {
+                    break;
+                }
+                
                 findTransform = transform.parent;
             }
         }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class ViewModelTest : ScriptableObjectViewModel
 {
     //public ViewModelField<int> PlayerName = new ViewModelField<int>();
-    public ViewModelField<string> PlayerNameTest2 = new ViewModelField<string>();
+    //public ViewModelField<string> PlayerNameTest2 = new ViewModelField<string>();
     public ViewModelListField<ViewModelItem> viewmodelItens = new ViewModelListField<ViewModelItem>();
     // public ViewModelField<List<string>> Test = new ViewModelField<List<string>>();
     

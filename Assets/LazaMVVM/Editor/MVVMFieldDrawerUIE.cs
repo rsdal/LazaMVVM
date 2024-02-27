@@ -9,17 +9,38 @@ using UnityEngine.UIElements;
 [CustomPropertyDrawer(typeof(BindInfo))]
 public class MVVMFieldDrawerUIE : PropertyDrawer
 {
+    private List<string> _possibleFields = new List<string>();
+    
     public override VisualElement CreatePropertyGUI(SerializedProperty property)
     {
         var container = new VisualElement();
 
         SerializedProperty viewModelSerializedProperty = property.FindPropertyRelative("viewModel");
-        var viewModelField =  new PropertyField(viewModelSerializedProperty, "ViewModel");
+        var viewModelField = new PropertyField(viewModelSerializedProperty, "ViewModel");
         container.Add(viewModelField);
+
+        DropdownField dropDownField = new DropdownField("Fields",
+            _possibleFields,
+            0);
+
+        SerializedProperty dropDownSerializedField = property.FindPropertyRelative("Field");
+        dropDownField.BindProperty(dropDownSerializedField);
+        container.Add(dropDownField);
         
+        viewModelField.RegisterValueChangeCallback(evt =>
+        {
+            dropDownSerializedField.serializedObject.ApplyModifiedProperties();
+            Refresh(property, viewModelSerializedProperty);
+        });
+        
+        return container;
+    }
+
+    private void Refresh(SerializedProperty property, SerializedProperty viewModelSerializedProperty)
+    {
         if (viewModelSerializedProperty.boxedValue != null)
         {
-            List<string> possibleFields = new List<string>();
+            _possibleFields.Clear();
 
             object filter = property.serializedObject.targetObject.GetType()
                 .GetCustomAttributes(false)
@@ -27,12 +48,13 @@ public class MVVMFieldDrawerUIE : PropertyDrawer
 
             if (filter is CommandBindFilter)
             {
-               Dictionary<string, MethodInfo> methods = ((IViewModel)viewModelSerializedProperty.boxedValue).GetMethods();
-            
-               foreach (KeyValuePair<string, MethodInfo> method in methods)
-               {
-                   possibleFields.Add(method.Key);
-               }
+                Dictionary<string, MethodInfo> methods =
+                    ((IViewModel)viewModelSerializedProperty.boxedValue).GetMethods();
+
+                foreach (KeyValuePair<string, MethodInfo> method in methods)
+                {
+                    _possibleFields.Add(method.Key);
+                }
             }
             else
             {
@@ -40,8 +62,9 @@ public class MVVMFieldDrawerUIE : PropertyDrawer
 
                 Type[] filters = bindFilter.GetFiltersTypes;
 
-                Dictionary<string, IViewModelField> fields = ((IViewModel)viewModelSerializedProperty.boxedValue).GetFields();
-            
+                Dictionary<string, IViewModelField> fields =
+                    ((IViewModel)viewModelSerializedProperty.boxedValue).GetFields();
+
                 foreach (KeyValuePair<string, IViewModelField> currentField in fields)
                 {
                     Type fieldType = currentField.Value.GetObject.GetType();
@@ -49,26 +72,15 @@ public class MVVMFieldDrawerUIE : PropertyDrawer
                     //Is it a list?
                     if (fieldType.IsGenericType)
                     {
-                        fieldType =  fieldType.GetGenericTypeDefinition();
+                        fieldType = fieldType.GetGenericTypeDefinition();
                     }
 
                     if (filters.Contains(fieldType))
                     {
-                        possibleFields.Add(currentField.Key);
-                    } 
-                } 
-             }
-            
-            DropdownField nameField = new DropdownField("Fields",
-                    possibleFields,
-                0);
-
-            SerializedProperty field = property.FindPropertyRelative("Field");
-            nameField.BindProperty(field);
-            
-            container.Add(nameField);
+                        _possibleFields.Add(currentField.Key);
+                    }
+                }
+            }
         }
-        
-        return container;
     }
 }

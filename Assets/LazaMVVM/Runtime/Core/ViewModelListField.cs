@@ -40,7 +40,7 @@ public class ViewModelListField<T> : IViewModelField, IList<T> where T : IViewMo
 
     public void CopyTo(T[] array, int arrayIndex)
     {
-        //propertyValue.CopyTo(array, arrayIndex);
+        propertyValue.ToArray().CopyTo(array, arrayIndex);
     }
 
     public bool Remove(T item)
