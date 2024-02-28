@@ -30,4 +30,9 @@ public class ScriptableObjectViewModel : ScriptableObject, IViewModel
     {
         Destroy(this);
     }
+    
+    public static T New<T>() where T : ScriptableObject, IViewModel
+    {
+        return CreateInstance<T>();
+    }
 }

@@ -30,4 +30,9 @@ public class MonoBehaviourViewModel : MonoBehaviour, IViewModel
     {
         Destroy(gameObject);
     }
+
+    public static T New<T>() where T : UnityEngine.Component, IViewModel
+    {
+       return new GameObject("ListItem").AddComponent<T>();
+    }
 }

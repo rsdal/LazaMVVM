@@ -19,18 +19,15 @@ public class ViewModelTest : ScriptableObjectViewModel
     {
         //PlayerName.Value = Random.Range(0, 100);
 
-        ViewModelItem viewModelItem = ViewModelItem.CreateInstance<ViewModelItem>();
+        ViewModelItem viewModelItem = ViewModelItem.New<ViewModelItem>();
         viewModelItem.Index.Value = Random.Range(0, 1000);
         viewmodelItens.Add(viewModelItem);
 
 
-        ViewModelItemBehaviour viewModelItemBehaviour = new GameObject("").AddComponent<ViewModelItemBehaviour>();
+        ViewModelItemBehaviour viewModelItemBehaviour = ViewModelItemBehaviour.New<ViewModelItemBehaviour>();
         viewModelItemBehaviour.Index.Value = Random.Range(0, 1000);
         viewModelItemBehaviours.Add(viewModelItemBehaviour);
 
-        //TODO Add logic to create easier new itens
-        
-        
         // Test.Value = new List<string>();
         
     }
