@@ -114,7 +114,6 @@ namespace LazaMVVM.Editor
                 else if (fieldType.IsGenericType)
                 {
                     fieldType = fieldType.GetGenericArguments().First();
-                    
                 }
 
                 if (filters.Contains(fieldType))

@@ -27,7 +27,7 @@ public class ListBindPropertyDrawer : PropertyDrawer
 
         // Filter types to find those that contain ListBind field
         availableTypes = types.Where(type =>
-            type.GetCustomAttribute<ListItem>() != null && type != typeof(ViewModelInstanceProvider)
+            type.GetCustomAttribute<ListItem>() != null && type != typeof(ViewModelListTemplateProvider)
         ).ToList();
 
         // Convert available types to string array

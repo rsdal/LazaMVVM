@@ -17,15 +17,13 @@ namespace LazaMVVM.Runtime.Binding
         {
             base.Initialize();
         
-            IViewModel viewModel = BindInfo.viewModel as IViewModel;
-        
-            bool isSuccess = viewModel.GetMethodByName(BindInfo.Field, out methodInfo);
+            bool isSuccess = BindInfo.RuntimeValue.GetMethodByName(BindInfo.Field, out methodInfo);
         
             if (!isSuccess)
             {
                 Debug.LogError($"Wasn't possible to find a method with: \n " +
                                $"name: {BindInfo.Field} \n " +
-                               $"viewmodel: {BindInfo.viewModel.GetType()} \n " +
+                               $"viewmodel: {BindInfo.RuntimeValue.GetType()} \n " +
                                $"GameObject: {gameObject.name}");
                 return;
             }
@@ -41,7 +39,7 @@ namespace LazaMVVM.Runtime.Binding
 
         private void OnInvoke()
         {
-            methodInfo.Invoke(BindInfo.viewModel, null);
+            methodInfo.Invoke(BindInfo.RuntimeValue, null);
         }
     }
 }

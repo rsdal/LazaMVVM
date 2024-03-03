@@ -13,5 +13,7 @@ namespace LazaMVVM.Runtime.Core
         public Object viewModel;
         [field: SerializeField]
         public string Field;
+
+        public IViewModel RuntimeValue;
     }
 } 

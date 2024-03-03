@@ -11,15 +11,13 @@ namespace LazaMVVM.Runtime.Core
         {
             base.Initialize();
 
-            IViewModel viewModel = BindInfo.viewModel as IViewModel;
-        
-            bool isSuccess = viewModel.GetFieldByName(BindInfo.Field, out field);
+            bool isSuccess = BindInfo.RuntimeValue.GetFieldByName(BindInfo.Field, out field);
         
             if (!isSuccess)
             {
                 Debug.LogError($"Wasn't possible to find a field with: \n " +
                                $"name: {BindInfo.Field} \n " +
-                               $"viewmodel: {BindInfo.viewModel.GetType()} \n " +
+                               $"viewmodel: {BindInfo.RuntimeValue.GetType()} \n " +
                                $"GameObject: {gameObject.name}");
             
                 return;

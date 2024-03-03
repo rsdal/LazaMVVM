@@ -5,10 +5,6 @@ using UnityEngine;
 [ListItem]
 public class ViewModelItem : BaseViewModelItem
 {
-    public ViewModelItem()
-    {
-        
-    }
     
     public ViewModelField<string> Name = new ViewModelField<string>();
     public ViewModelField<int> Index = new ViewModelField<int>();

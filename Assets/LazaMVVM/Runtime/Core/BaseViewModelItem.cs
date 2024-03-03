@@ -5,15 +5,10 @@ using UnityEngine;
 
 namespace LazaMVVM.Runtime.Core
 {
-    public abstract class BaseViewModelItem : Object, IViewModel
+    public abstract class BaseViewModelItem : IViewModel
     {
         private readonly ViewModel _viewModel = new ViewModel();
 
-        protected BaseViewModelItem()
-        {
-            
-        }
-        
         public Dictionary<string, IViewModelField> GetFields()
         {
             return _viewModel.GetFields(this);

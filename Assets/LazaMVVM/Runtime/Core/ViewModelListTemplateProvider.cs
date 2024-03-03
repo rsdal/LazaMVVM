@@ -3,27 +3,26 @@ using System.Reflection;
 using UnityEngine;
 using System;
 using LazaMVVM.Runtime.Attributes;
-using Object = UnityEngine.Object;
 
 namespace LazaMVVM.Runtime.Core
 {
     [ListItem]
-    [CreateAssetMenu(menuName = "LazaMVVM/New View Model Instance Provider", fileName = "ViewModelInstance")]
-    public class ViewModelInstanceProvider : ScriptableObject, IViewModel
+    [CreateAssetMenu(menuName = "LazaMVVM/New View Model Template Provider", fileName = "ViewModelListTemplateProvider")]
+    public class ViewModelListTemplateProvider : ScriptableObject, IViewModel
     {
         public MyListBind myListBind;
         private readonly ViewModel _viewModel = new ViewModel();
         
-        private IViewModel _test;
+        private IViewModel _savedViewModel;
         private string lastName;
         
         private IViewModel Test
         {
             get
             {
-                if (_test != null && lastName == myListBind.ClassName)
+                if (_savedViewModel != null && lastName == myListBind.ClassName)
                 {
-                    return _test;
+                    return _savedViewModel;
                 }
                 
                 lastName = myListBind.ClassName;
@@ -38,15 +37,11 @@ namespace LazaMVVM.Runtime.Core
             
                     if (type != null)
                     {
-                        //This is a really specific situation, since I don't need to keep a proper instance I'm using the activator
-                        //This will be a null object because it's partially handled by Unity
-                        //But it will work as a type and this will work for everything else
-                        //Not pretty but it works for now.
-                        var instance = Activator.CreateInstance(type);
+                        object instance = Activator.CreateInstance(type);
 
-                        _test = (IViewModel)instance;
+                        _savedViewModel = (IViewModel)instance;
                         
-                        return _test;
+                        return _savedViewModel;
                     }
                     else
                     {
