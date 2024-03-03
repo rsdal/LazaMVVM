@@ -1,14 +1,17 @@
 using System;
 using System.Linq;
 
-[AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-public class BindFilter : Attribute
+namespace LazaMVVM.Runtime.Attributes
 {
-    public Type[] GetFiltersTypes => filterTypes;
-    private Type[] filterTypes;
-    
-    public BindFilter(params Type[] types)
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
+    public class BindFilter : Attribute
     {
-        filterTypes = types?.ToArray();
+        public Type[] GetFiltersTypes => filterTypes;
+        private Type[] filterTypes;
+    
+        public BindFilter(params Type[] types)
+        {
+            filterTypes = types?.ToArray();
+        }
     }
 }

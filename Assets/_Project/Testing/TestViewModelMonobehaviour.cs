@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using LazaMVVM.Runtime.Attributes;
+using LazaMVVM.Runtime.Core;
 using UnityEngine;
 
 public class TestViewModelMonobehaviour : MonoBehaviourViewModel

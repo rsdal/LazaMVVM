@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using LazaMVVM.Runtime.Attributes;
+using LazaMVVM.Runtime.Core;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ViewModelTest", menuName = "ViewModels/New ViewModelTest")]
@@ -11,6 +13,8 @@ public class ViewModelTest : ScriptableObjectViewModel
 
     public ViewModelListField<ViewModelItemBehaviour> viewModelItemBehaviours =
         new ViewModelListField<ViewModelItemBehaviour>();
+
+    public List<int> eita = new List<int>();
     
     public int x;
     
@@ -19,14 +23,14 @@ public class ViewModelTest : ScriptableObjectViewModel
     {
         //PlayerName.Value = Random.Range(0, 100);
 
-        ViewModelItem viewModelItem = ViewModelItem.New<ViewModelItem>();
+        ViewModelItem viewModelItem = new ViewModelItem();
         viewModelItem.Index.Value = Random.Range(0, 1000);
         viewmodelItens.Add(viewModelItem);
 
 
-        ViewModelItemBehaviour viewModelItemBehaviour = ViewModelItemBehaviour.New<ViewModelItemBehaviour>();
-        viewModelItemBehaviour.Index.Value = Random.Range(0, 1000);
-        viewModelItemBehaviours.Add(viewModelItemBehaviour);
+        // ViewModelItemBehaviour viewModelItemBehaviour = ViewModelItemBehaviour.New<ViewModelItemBehaviour>();
+        // viewModelItemBehaviour.Index.Value = Random.Range(0, 1000);
+        // viewModelItemBehaviours.Add(viewModelItemBehaviour);
 
         // Test.Value = new List<string>();
         
@@ -36,7 +40,7 @@ public class ViewModelTest : ScriptableObjectViewModel
     public void Remove()
     {
         viewmodelItens.RemoveAt(0);
-        viewModelItemBehaviours.RemoveAt(0);
+        //viewModelItemBehaviours.RemoveAt(0);
     }
     
     [ViewModelCommand]

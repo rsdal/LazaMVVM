@@ -1,23 +1,26 @@
 using System;
 using UnityEngine;
 
-[Serializable]
-public class ViewModelField<T> : IViewModelField
+namespace LazaMVVM.Runtime.Core
 {
-    [SerializeField]
-    protected T propertyValue;
-    
-    public T Value
+    [Serializable]
+    public class ViewModelField<T> : IViewModelField
     {
-        get => propertyValue;
-        set
-        {
-            propertyValue = value;
-            OnValueChanged?.Invoke(propertyValue);
-        }
-    }
-
-    public Action<object> OnValueChanged { get; set; }
+        [SerializeField]
+        protected T propertyValue;
     
-    public object GetObject => Value;
+        public T Value
+        {
+            get => propertyValue;
+            set
+            {
+                propertyValue = value;
+                OnValueChanged?.Invoke(propertyValue);
+            }
+        }
+
+        public Action<object> OnValueChanged { get; set; }
+    
+        public object GetObject => Value;
+    }
 }

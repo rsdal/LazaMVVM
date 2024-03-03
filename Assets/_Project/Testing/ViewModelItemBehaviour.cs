@@ -1,13 +1,15 @@
-﻿using UnityEngine;
+﻿using LazaMVVM.Runtime.Attributes;
+using LazaMVVM.Runtime.Core;
+using UnityEngine;
 
 [ListItem]
-public class ViewModelItemBehaviour : MonoBehaviourViewModel
+public class ViewModelItemBehaviour : BaseViewModelItem
 {
-    public ViewModelField<int> Index = new ViewModelField<int>();
+    public ViewModelField<int> Index2 = new ViewModelField<int>();
 
     [ViewModelCommand]
-    public void DebugIndex()
+    public void DebugIndex2()
     {
-        Debug.Log($"This is my index {Index.Value}");
+        Debug.Log($"This is my index {Index2.Value}");
     }
 }

@@ -1,39 +1,43 @@
 using System.Reflection;
+using LazaMVVM.Runtime.Attributes;
 using UnityEngine;
 
-public abstract class BaseBind : MonoBehaviour
+namespace LazaMVVM.Runtime.Core
 {
-    private void Start()
+    public abstract class BaseBind : MonoBehaviour
     {
-        var listItem = BindInfo.viewModel.GetType().GetCustomAttribute<ListItem>();
-        
-        if (listItem != null)
+        private void Start()
         {
-            Transform findTransform = transform;
-            
-            while (findTransform != null)
+            var listItem = BindInfo.viewModel.GetType().GetCustomAttribute<ListItem>();
+        
+            if (listItem != null)
             {
-                ViewModelProvider viewModelProvider = findTransform.GetComponent<ViewModelProvider>();
-                
-                if (viewModelProvider != null)
+                Transform findTransform = transform;
+            
+                while (findTransform != null)
                 {
-                    BindInfo.viewModel = (Object)viewModelProvider.ViewModel;
-                    break;
-                }
+                    ViewModelProvider viewModelProvider = findTransform.GetComponent<ViewModelProvider>();
+                
+                    if (viewModelProvider != null)
+                    {
+                        BindInfo.viewModel = (Object)viewModelProvider.ViewModel;
+                        break;
+                    }
 
-                if (transform.parent == transform.root)
-                {
-                    break;
-                }
+                    if (transform.parent == transform.root)
+                    {
+                        break;
+                    }
                 
-                findTransform = transform.parent;
+                    findTransform = transform.parent;
+                }
             }
+
+            Initialize();
         }
 
-        Initialize();
+        protected virtual void Initialize(){}
+
+        public BindInfo BindInfo;
     }
-
-    protected virtual void Initialize(){}
-
-    public BindInfo BindInfo;
 }

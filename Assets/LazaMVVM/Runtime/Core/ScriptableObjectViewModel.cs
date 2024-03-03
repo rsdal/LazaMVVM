@@ -2,37 +2,30 @@
 using System.Reflection;
 using UnityEngine;
 
-public class ScriptableObjectViewModel : ScriptableObject, IViewModel
+namespace LazaMVVM.Runtime.Core
 {
-    private readonly ViewModel _viewModel = new ViewModel();
+    public class ScriptableObjectViewModel : ScriptableObject, IViewModel
+    {
+        private readonly ViewModel _viewModel = new ViewModel();
     
-    public Dictionary<string, IViewModelField> GetFields()
-    {
-        return _viewModel.GetFields(this);
-    }
+        public Dictionary<string, IViewModelField> GetFields()
+        {
+            return _viewModel.GetFields(this);
+        }
 
-    public bool GetFieldByName(string name, out IViewModelField field)
-    {
-        return _viewModel.GetFieldByName(this, name, out field);
-    }
+        public bool GetFieldByName(string name, out IViewModelField field)
+        {
+            return _viewModel.GetFieldByName(this, name, out field);
+        }
 
-    public Dictionary<string, MethodInfo> GetMethods()
-    {
-        return _viewModel.GetMethods(this);
-    }
+        public Dictionary<string, MethodInfo> GetMethods()
+        {
+            return _viewModel.GetMethods(this);
+        }
 
-    public bool GetMethodByName(string name, out MethodInfo method)
-    {
-        return _viewModel.GetMethodByName(this, name, out method);
-    }
-
-    public void RemoveItem()
-    {
-        Destroy(this);
-    }
-    
-    public static T New<T>() where T : ScriptableObject, IViewModel
-    {
-        return CreateInstance<T>();
+        public bool GetMethodByName(string name, out MethodInfo method)
+        {
+            return _viewModel.GetMethodByName(this, name, out method);
+        }
     }
 }

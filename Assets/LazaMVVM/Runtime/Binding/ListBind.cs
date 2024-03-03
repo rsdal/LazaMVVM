@@ -1,33 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using TMPro;
+﻿using System.Collections.Generic;
+using LazaMVVM.Runtime.Attributes;
+using LazaMVVM.Runtime.Core;
 using UnityEngine;
 
-[BindFilter(typeof(List<>))]
-public class ListBind : BaseFieldBind<List<IViewModel>>
+namespace LazaMVVM.Runtime.Binding
 {
-    [SerializeField]
-    private ViewModelProvider Template;
-    [SerializeField]
-    private Transform parent;
-
-    private List<ViewModelProvider> instances = new List<ViewModelProvider>();
-    
-    protected override void OnValueChanged(List<IViewModel> newValue)
+    [BindFilter(typeof(IList<>))]
+    public class ListBind : BaseFieldBind<List<IViewModel>>
     {
-        for (int i = instances.Count - 1; i >= 0; i--)
+        [SerializeField]
+        private ViewModelProvider Template;
+        [SerializeField]
+        private Transform parent;
+
+        private List<ViewModelProvider> instances = new List<ViewModelProvider>();
+    
+        protected override void OnValueChanged(List<IViewModel> newValue)
         {
-            Destroy(instances[i].gameObject);   
-            instances.RemoveAt(i);
-        }
+            for (int i = instances.Count - 1; i >= 0; i--)
+            {
+                Destroy(instances[i].gameObject);   
+                instances.RemoveAt(i);
+            }
         
-        for (int i = 0; i < newValue.Count; i++)
-        {
-            ViewModelProvider provider = Instantiate(Template, parent);   
+            for (int i = 0; i < newValue.Count; i++)
+            {
+                ViewModelProvider provider = Instantiate(Template, parent);   
             
-            provider.ViewModel = newValue[i];
+                provider.ViewModel = newValue[i];
             
-            instances.Add(provider);
-        }   
+                instances.Add(provider);
+            }   
+        }
     }
 }

@@ -1,8 +1,11 @@
 using System;
 
-public interface IViewModelField
+namespace LazaMVVM.Runtime.Core
 {
-    Action<object> OnValueChanged { get; set; }
+    public interface IViewModelField
+    {
+        Action<object> OnValueChanged { get; set; }
 
-    object GetObject { get; }
+        object GetObject { get; }
+    }
 }

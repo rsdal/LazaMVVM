@@ -1,7 +1,10 @@
 using System;
 
-[AttributeUsage(AttributeTargets.Method)]
-public class ViewModelCommand : Attribute
+namespace LazaMVVM.Runtime.Attributes
 {
+    [AttributeUsage(AttributeTargets.Method)]
+    public class ViewModelCommand : Attribute
+    {
     
+    }
 }

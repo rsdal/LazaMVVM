@@ -1,19 +1,24 @@
+using LazaMVVM.Runtime.Attributes;
+using LazaMVVM.Runtime.Core;
 using TMPro;
 using UnityEngine;
 
-[BindFilter(typeof(string), typeof(char), typeof(bool), typeof(int), typeof(float))]
-[RequireComponent(typeof(TextMeshProUGUI))]
-public class TextMeshProFieldBind : BaseFieldBind<object>
+namespace LazaMVVM.Runtime.Binding
 {
-    private TextMeshProUGUI text;
-
-    private void Awake()
+    [BindFilter(typeof(string), typeof(char), typeof(bool), typeof(int), typeof(float))]
+    [RequireComponent(typeof(TextMeshProUGUI))]
+    public class TextMeshProFieldBind : BaseFieldBind<object>
     {
-        text = GetComponent<TextMeshProUGUI>();
-    }
+        private TextMeshProUGUI text;
 
-    protected override void OnValueChanged(object newValue)
-    {
-        text.SetText(newValue.ToString());
+        private void Awake()
+        {
+            text = GetComponent<TextMeshProUGUI>();
+        }
+
+        protected override void OnValueChanged(object newValue)
+        {
+            text.SetText(newValue.ToString());
+        }
     }
 }

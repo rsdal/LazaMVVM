@@ -1,6 +1,9 @@
 using UnityEngine;
 
-public class ViewModelProvider : MonoBehaviour
+namespace LazaMVVM.Runtime.Core
 {
-    public IViewModel ViewModel { get; set; }
+    public class ViewModelProvider : MonoBehaviour
+    {
+        public IViewModel ViewModel { get; set; }
+    }
 }

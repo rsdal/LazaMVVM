@@ -1,12 +1,17 @@
 ﻿using System;
+using LazaMVVM.Runtime.Attributes;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-[Serializable]
-public class BindInfo
+namespace LazaMVVM.Runtime.Core
 {
-    [field: SerializeField]
-    public Object viewModel;
-    [field: SerializeField]
-    public string Field;
-}
+    [Serializable]
+    public class BindInfo
+    {
+        [IViewModel(typeof(IViewModel))]
+        [field: SerializeField]
+        public Object viewModel;
+        [field: SerializeField]
+        public string Field;
+    }
+} 

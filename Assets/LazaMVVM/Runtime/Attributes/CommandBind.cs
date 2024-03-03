@@ -1,7 +1,10 @@
 using System;
 
-[AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-public class CommandBindFilter : Attribute
+namespace LazaMVVM.Runtime.Attributes
 {
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
+    public class CommandBindFilter : Attribute
+    {
     
+    }
 }

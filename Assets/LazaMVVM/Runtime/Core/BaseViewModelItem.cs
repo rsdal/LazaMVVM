@@ -1,13 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
+using LazaMVVM.Runtime.Core;
 using UnityEngine;
 
 namespace LazaMVVM.Runtime.Core
 {
-    public class MonoBehaviourViewModel : MonoBehaviour, IViewModel
+    public abstract class BaseViewModelItem : Object, IViewModel
     {
         private readonly ViewModel _viewModel = new ViewModel();
-    
+
+        protected BaseViewModelItem()
+        {
+            
+        }
+        
         public Dictionary<string, IViewModelField> GetFields()
         {
             return _viewModel.GetFields(this);
