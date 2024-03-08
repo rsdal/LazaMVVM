@@ -29,25 +29,7 @@ namespace LazaMVVM.Runtime.Core
         
         private void FindViewModelProvider()
         {
-            Transform findTransform = transform;
-
-            while (findTransform != null)
-            {
-                ViewModelProvider viewModelProvider = findTransform.GetComponent<ViewModelProvider>();
-
-                if (viewModelProvider != null)
-                {
-                    BindInfo.RuntimeValue = viewModelProvider.ViewModel;
-                    break;
-                }
-
-                if (transform.parent == transform.root)
-                {
-                    break;
-                }
-
-                findTransform = transform.parent;
-            }
+            BindInfo.RuntimeValue = ((ViewModelProvider)BindInfo.viewModel).ViewModel;
         }
 
         private void UpdateRuntimeViewModel()

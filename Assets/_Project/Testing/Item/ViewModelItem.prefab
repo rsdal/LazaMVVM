@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BindInfo:
-    viewModel: {fileID: 11400000, guid: 8db608ccbae92794da09d6e59be6ac9d, type: 2}
+    viewModel: {fileID: 614978497239564720}
     Field: Index
 --- !u!114 &614978497239564720
 MonoBehaviour:
@@ -164,6 +164,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cda0ff6f16f99614b9ba2c6d0ce6ccf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myListBind:
+    ClassName: ViewModelItem, TestProject, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!1 &2048045293474449734
 GameObject:
   m_ObjectHideFlags: 0
@@ -299,7 +301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BindInfo:
-    viewModel: {fileID: 11400000, guid: 8db608ccbae92794da09d6e59be6ac9d, type: 2}
+    viewModel: {fileID: 614978497239564720}
     Field: DebugIndex
 --- !u!1 &7559246574848337112
 GameObject:

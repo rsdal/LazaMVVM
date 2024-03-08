@@ -6,7 +6,7 @@ using LazaMVVM.Runtime.Attributes;
 
 namespace LazaMVVM.Runtime.Core
 {
-    public class ViewModel 
+    public class ReflectionCache 
     {
         private Dictionary<string, IViewModelField> fieldsDictionary { get; set; }
         private Dictionary<string, MethodInfo> methodsDictionary { get; set; }

@@ -6,26 +6,26 @@ namespace LazaMVVM.Runtime.Core
 {
     public class MonoBehaviourViewModel : MonoBehaviour, IViewModel
     {
-        private readonly ViewModel _viewModel = new ViewModel();
+        private readonly ReflectionCache _reflectionCache = new ReflectionCache();
     
         public Dictionary<string, IViewModelField> GetFields()
         {
-            return _viewModel.GetFields(this);
+            return _reflectionCache.GetFields(this);
         }
 
         public bool GetFieldByName(string name, out IViewModelField field)
         {
-            return _viewModel.GetFieldByName(this, name, out field);
+            return _reflectionCache.GetFieldByName(this, name, out field);
         }
 
         public Dictionary<string, MethodInfo> GetMethods()
         {
-            return _viewModel.GetMethods(this);
+            return _reflectionCache.GetMethods(this);
         }
 
         public bool GetMethodByName(string name, out MethodInfo method)
         {
-            return _viewModel.GetMethodByName(this, name, out method);
+            return _reflectionCache.GetMethodByName(this, name, out method);
         }
     }
 }
