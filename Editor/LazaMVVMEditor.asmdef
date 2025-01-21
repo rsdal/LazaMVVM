@@ -1,0 +1,18 @@
+{
+    "name": "LazaMVVMEditor",
+    "rootNamespace": "LazaMVVM.Editor",
+    "references": [
+        "GUID:0a4527e1197ed3b4fb106cddf48af311"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
