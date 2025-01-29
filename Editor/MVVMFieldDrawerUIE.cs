@@ -119,6 +119,12 @@ namespace LazaMVVM.Editor
                 if (filters.Contains(fieldType))
                 {
                     _possibleFields.Add(currentField.Key);
+                    continue;
+                }
+
+                if (fieldType.IsEnum && filters.Contains(typeof(Enum)))
+                {
+                    _possibleFields.Add(currentField.Key);
                 }
             }
         }
