@@ -7,5 +7,7 @@ namespace LazaMVVM.Runtime.Core
         Action<object> OnValueChanged { get; set; }
 
         object GetObject { get; }
+
+        void SetObject(object value);
     }
 }
