@@ -12,6 +12,11 @@ namespace LazaMVVM.Runtime.Core
 
         public Action<object> OnValueChanged { get; set; }
         public object GetObject => propertyValue;
+
+        public void SetObject(object value)
+        {
+            propertyValue = (List<IViewModel>)value;
+        }
     
         public IEnumerator<T> GetEnumerator()
         {
