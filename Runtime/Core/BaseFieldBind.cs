@@ -5,12 +5,20 @@ namespace LazaMVVM.Runtime.Core
 {
     public abstract class BaseFieldBind<T> : BaseBind
     {
-        private IViewModelField field;
+        protected IViewModelField field;
 
         protected override void Initialize()
         {
             base.Initialize();
 
+            if (BindInfo.RuntimeValue == null)
+            {
+                Debug.LogError($"View model is null on \n" +
+                               $"GameObject: {gameObject.name}");
+                
+                return;
+            }
+            
             bool isSuccess = BindInfo.RuntimeValue.GetFieldByName(BindInfo.Field, out field);
         
             if (!isSuccess)
