@@ -50,13 +50,28 @@ namespace LazaMVVM.Editor
 
         private void Refresh(SerializedProperty property, SerializedProperty viewModelSerializedProperty)
         {
-            if (viewModelSerializedProperty.boxedValue == null || viewModelSerializedProperty.boxedValue is not IViewModel)
+            if (viewModelSerializedProperty.boxedValue == null)
             {
                 _dropDownField.SetEnabled(false);
-                _warningLabel.text = $"Field {property.displayName} does not implement {typeof(IViewModel)}";
+                _warningLabel.text = $"Please assign a ViewModel to ViewModel field above";
                 return;
             }
+            
+            if (viewModelSerializedProperty.boxedValue is GameObject gameObject)
+            {
+                viewModelSerializedProperty.boxedValue = gameObject.GetComponents<Component>()
+                    .FirstOrDefault(c => c is IViewModel);
+                
+                viewModelSerializedProperty.serializedObject.ApplyModifiedProperties();
+            }
 
+            if (viewModelSerializedProperty.boxedValue is not IViewModel)
+            {
+                _dropDownField.SetEnabled(false);
+                _warningLabel.text = $"Please assign a ViewModel to ViewModel field above";
+                return;
+            }
+            
             _dropDownField.SetEnabled(true);
             _warningLabel.text = "";
 
