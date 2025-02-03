@@ -22,5 +22,11 @@ namespace LazaMVVM.Runtime.Core
         public Action<object> OnValueChanged { get; set; }
     
         public object GetObject => Value;
+
+        public void SetObject(object value)
+        {
+            propertyValue = (T)value;
+            OnInternalValueChanged?.Invoke(propertyValue);
+        }
     }
 }
