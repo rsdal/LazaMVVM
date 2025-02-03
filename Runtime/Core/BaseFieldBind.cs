@@ -5,7 +5,7 @@ namespace LazaMVVM.Runtime.Core
 {
     public abstract class BaseFieldBind<T> : BaseBind
     {
-        private IViewModelField field;
+        protected IViewModelField field;
 
         protected override void Initialize()
         {
