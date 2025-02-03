@@ -16,7 +16,15 @@ namespace LazaMVVM.Runtime.Binding
         protected override void Initialize()
         {
             base.Initialize();
-        
+
+            if (BindInfo.RuntimeValue == null)
+            {
+                Debug.LogError($"View model is null on \n" +
+                               $"GameObject: {gameObject.name}");
+                
+                return;
+            }
+            
             bool isSuccess = BindInfo.RuntimeValue.GetMethodByName(BindInfo.Field, out methodInfo);
         
             if (!isSuccess)
