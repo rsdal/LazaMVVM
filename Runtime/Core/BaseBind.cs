@@ -22,6 +22,11 @@ namespace LazaMVVM.Runtime.Core
 
         private bool IsThisViewModelAListItem()
         {
+            if (BindInfo.viewModel == null)
+            {
+                return false;
+            }
+            
             var listItem = BindInfo.viewModel.GetType().GetCustomAttribute<ListItem>();
             
             return listItem != null;
