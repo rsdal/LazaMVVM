@@ -20,7 +20,10 @@ namespace LazaMVVM.Runtime.Core
     
         public IEnumerator<T> GetEnumerator()
         {
-            return ((IEnumerable<T>)propertyValue).GetEnumerator();
+            foreach (IViewModel item in propertyValue)
+            {
+                yield return (T)item;
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
