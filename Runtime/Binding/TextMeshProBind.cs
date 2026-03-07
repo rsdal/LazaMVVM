@@ -18,6 +18,18 @@ namespace LazaMVVM.Runtime.Binding
 
         protected override void OnValueChanged(object newValue)
         {
+            if (text == null)
+            {
+                Debug.LogWarning("You tried to set the value before the text initialized");
+                return;
+            }
+
+            if (newValue == null)
+            {
+                Debug.LogWarning("You tried to set a null value");
+                return;
+            }
+            
             text.SetText(newValue.ToString());
         }
     }
