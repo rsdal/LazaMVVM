@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace LazaMVVM.Runtime.Core
@@ -14,6 +15,8 @@ namespace LazaMVVM.Runtime.Core
             get => propertyValue;
             set
             {
+                if (EqualityComparer<T>.Default.Equals(propertyValue, value)) return;
+                
                 propertyValue = value;
                 OnValueChanged?.Invoke(propertyValue);
             }
