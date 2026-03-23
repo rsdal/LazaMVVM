@@ -25,10 +25,4 @@ namespace LazaMVVM.Runtime.Binding
             gameObject.SetActive(newValue);
         }
     }
-
-    public enum Targets
-    {
-        Self,
-        Target
-    }
 }

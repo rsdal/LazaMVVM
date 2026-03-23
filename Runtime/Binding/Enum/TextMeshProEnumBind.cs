@@ -16,7 +16,7 @@ namespace LazaMVVM.Runtime.Binding
             text = GetComponent<TextMeshProUGUI>();
         }
         
-        protected override void OnChanged(Enum newValue)
+        protected override void OnChanged(Enum newValue, bool isEqual)
         {
             text.SetText(newValue.ToString());
         }
