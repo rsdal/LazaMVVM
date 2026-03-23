@@ -5,11 +5,13 @@ using UnityEngine;
 namespace LazaMVVM.Runtime.Core
 {
     [Serializable]
-    public class ViewModelField<T> : IViewModelField
+    public class ViewModelField<T> : IViewModelField, ISerializationCallbackReceiver
     {
         [SerializeField]
         protected T propertyValue;
     
+        private T _lastInspectorValue;
+        
         public T Value
         {
             get => propertyValue;
@@ -30,5 +32,27 @@ namespace LazaMVVM.Runtime.Core
         {
             propertyValue = (T)value;
         }
+        
+        void ISerializationCallbackReceiver.OnBeforeSerialize() { }
+
+        void ISerializationCallbackReceiver.OnAfterDeserialize()
+        {
+            if (EqualityComparer<T>.Default.Equals(propertyValue, _lastInspectorValue)) return;
+            
+            _lastInspectorValue = propertyValue;
+                
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.delayCall += NotifyFromInspector;
+#endif
+        }
+
+#if UNITY_EDITOR
+        private void NotifyFromInspector()
+        {
+            UnityEditor.EditorApplication.delayCall -= NotifyFromInspector;
+            OnValueChanged?.Invoke(propertyValue);
+        }
+#endif
+        
     }
 }
