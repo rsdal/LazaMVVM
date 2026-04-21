@@ -8,21 +8,18 @@ namespace LazaMVVM.Runtime.Binding
     [BindFilter(typeof(bool))]
     public class ActiveBinding : BaseFieldBind<bool>
     {
+        [SerializeField] 
+        private bool Invert;
         [SerializeField]
         private Targets Target;
         [SerializeField]
         private GameObject TargetObject;
         
-        
         protected override void OnValueChanged(bool newValue)
         {
-            if (Target == Targets.Target)
-            {
-                TargetObject.SetActive(newValue);
-                return;
-            }
+            GameObject correctGameObject = Target == Targets.Target ? TargetObject : gameObject;
             
-            gameObject.SetActive(newValue);
+            correctGameObject.SetActive(Invert ? !newValue : newValue);
         }
     }
 }
